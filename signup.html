@@ -347,25 +347,30 @@ body {
 const hamburger = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
+// Menu Logic
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     mobileMenu.classList.toggle('open');
-    
-    
-    if(mobileMenu.classList.contains('open')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
 });
-const navLinks = document.querySelectorAll('.menu-links a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = 'auto';
-    });
+
+// FORM LOGIC: Save username and redirect
+const signupForm = document.querySelector('.signup-form');
+
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Stop page from refreshing
+
+    // Get the values from the inputs
+    const usernameInput = document.getElementById('username').value;
+    const fullNameInput = document.getElementById('full-name').value;
+
+    // Save to LocalStorage (Browser Memory)
+    localStorage.setItem('glamour_username', usernameInput);
+    localStorage.setItem('glamour_fullname', fullNameInput);
+
+    // Redirect to Dashboard
+    window.location.href = "dashboard.html"; 
 });
-    </script>
+</script>
 </body>
 </html>
